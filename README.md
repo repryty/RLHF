@@ -38,3 +38,47 @@ This stage involves collecting comparison data to establish human preferences fo
 
 ## Training and Assessing the Final Model with Reinforcement Learning
 The training stage is a challenging process, and the final model assessment is a critical component in evaluating your model's quality. It is essential to determine whether the model adheres to the provided instructions, avoids biases, and maintains a high standard of performance.
+
+# 한국어 번역
+## ML 모델과 인간 피드백 정렬하기
+
+- [이 저장소에 포함된 내용:](#이-저장소에-포함된-내용)
+  - [이 저장소가 당신에게 관심 있는 이유:](#이-저장소가-당신에게-관심-있는-이유)
+  - [이 저장소에 대한 질문이 있거나 도움이 필요한 경우:](#이-저장소에-대한-질문이-있거나-도움이 필요한-경우)
+- [지도 학습 모델 기준 설정](#지도-학습-모델-기준-설정)
+- [인간 피드백 수집 및 통합](#인간-피드백-수집-및-통합)
+- [강화 학습을 사용한 최종 모델 학습 및 평가](#강화-학습을-사용한-최종-모델-학습-및-평가)
+
+![모델 정렬 단계](./images/RLHF.png)
+
+## 이 저장소에 포함된 내용:
+
+이 저장소에는 모든 수준의 개발자, 데이터 과학자 및 머신 러닝 전문가를 위한 튜토리얼, 모범 사례 및 참고 자료 모음이 포함되어 있습니다.
+
+### 이 저장소가 당신에게 관심 있는 이유:
+- [Nikolai Liubimov](https://www.linkedin.com/in/liubimov/) 및 [Erin Mikail Staples](https://www.linkedin.com/in/erinmikail/)의 PyData Berlin Talk에 참석한 경우
+- 데이터 중심 모델 개발에 관심이 있는 경우
+- [Label Studio](https://labelstud.io)를 사용하여 ML 프로세스와 모델을 개선하고 있는 경우
+
+### 이 저장소에 대한 질문이 있거나 도움이 필요한 경우:
+- 이 저장소는 [Label Studio](https://labelstud.io) 팀에서 관리합니다.
+- [Label Studio 커뮤니티 팀](mailto:community@labelstud.io)에 문의하거나 질문 사항이 있으면 문제를 제기하세요.
+- [Label Studio 커뮤니티 Slack](https://slack.labelstud.io/?source=github-RLHF)에 가입하세요
+- [Awesome List](https://github.com/heartexlabs/awesome-human-in-the-loop/tree/master)에서 Human in the Loop / RHLF에 대한 자세한 리소스를 확인하세요.
+
+
+## 지도 학습 모델 기준 설정
+이 단계에서는 레이블이 지정된 텍스트 데이터를 수집하여 초기 대규모 언어 모델(LLM)을 학습합니다. 이는 특정 작업에 대한 성능 향상에 중점을 둡니다. 이 단계에는 다양한 작업에 맞게 기본 모델을 조정하여 정확하고 맥락에 맞는 응답을 생성하는 기능을 향상시키기 위한 지침과 응답을 수집하는 것이 포함됩니다.
+일반적으로 이 단계에는 다음이 포함됩니다.
+- 일반 작업(예: [GPT2](https://huggingface.co/gpt2) 또는 [GPT-J](https://huggingface.co/EleutherAI/gpt-j-6b))에서 상당히 잘 수행할 수 있는 기본 기반 모델(FM) 선택
+- 프롬프트 입력과 응답으로 이루어진 데이터셋을 생성합니다. 데이터셋을 수동으로 레이블을 지정하거나 [예제에 제공된 것처럼](https://github.com/tatsu-lab/stanford_alpaca) 데이터를 생성할 수 있습니다.
+- 지도 학습 모델 미세 조정을 수행합니다.
+
+## 인간 피드백 수집 및 통합
+이 단계에는 지도 학습 모델에서 생성된 응답에 대한 인간의 선호도를 설정하기 위해 비교 데이터를 수집하는 것이 포함됩니다. 품질을 기준으로 여러 응답을 순위를 매김함으로써 인간의 선호도를 효과적으로 포착하는 보상 모델을 학습할 수 있습니다. 이 보상 모델은 강화 학습에서 중요한 역할을 하며 미세 조정된 기반 모델의 성능을 최적화합니다.
+
+[인간 피드백 수집 튜토리얼](tutorials/RLHF_with_Custom_Datasets.ipynb) - 이 Jupyter Notebook 튜토리얼은 비교 데이터 수집, 인간 선호도 설정 및 이 피드백을 보상 모델 학습에 통합하는 과정을 안내합니다.
+
+## 강화 학습을 사용한 최종 모델 학습 및 평가
+학습 단계는 어려운 과정이며 최종 모델 평가는 모델 품질을 평가하는 데 매우 중요한 구성 요소입니다. 모델이 제공된 지침을 따르는지, 편견을 피하는지, 높은 성능 기준을 유지하는지 확인하는 것이 필수적입니다.
+
